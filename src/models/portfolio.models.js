@@ -12,6 +12,8 @@ const portfolioSchema = new mongoose.Schema({
     },
     companyName: {
         type: String,
+        unique:true,
+        trim:true,
         require: true,
     },
     website: {

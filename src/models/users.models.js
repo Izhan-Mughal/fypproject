@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
 
     email: {
         type: String,
+        unique:true,
         require: true,
     },
     password: {
@@ -53,10 +54,25 @@ userSchema.methods.generateToken = async function () {
         return jwt.sign({
             userId: this._id.toString(),
             email: this.email,
-            isAdmin: this.isAdmin,
         },
+            // Access Token
             process.env.JWT_SECRET_KEY, {
-            expiresIn: "30d",
+            expiresIn: "1d",
+        }
+        )
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+userSchema.methods.generateRefreshToken = async function () {
+    try {
+        return jwt.sign({
+            userId: this._id.toString(),
+        },
+            // Access Token
+            process.env.JWT_SECRET_KEY, {
+            expiresIn: "10d",
         }
         )
     } catch (error) {
@@ -66,7 +82,7 @@ userSchema.methods.generateToken = async function () {
 }
 userSchema.methods.comparePassword = async function (password) {
     const user = this;
-    return bcrypt.compare(password, user.password);
+    return await bcrypt.compare(password, user.password);
 }
 
 const User = new mongoose.model('User', userSchema);
