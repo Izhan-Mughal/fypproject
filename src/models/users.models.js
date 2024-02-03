@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        unique:true,
+        unique: true,
         require: true,
     },
     password: {
@@ -24,12 +24,16 @@ const userSchema = new mongoose.Schema({
         require: false,
     },
     isActive: {
-        type: String,
+        type: Boolean,
+        default: false,
         require: false,
     },
     accType: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'accType',
+    },
+    refreshToken: {
+        type: String
     }
 },
     {
