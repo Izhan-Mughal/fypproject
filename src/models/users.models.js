@@ -60,8 +60,8 @@ userSchema.methods.generateToken = async function () {
             email: this.email,
         },
             // Access Token
-            process.env.JWT_SECRET_KEY, {
-            expiresIn: "1d",
+            process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: "10d",
         }
         )
     } catch (error) {
@@ -75,8 +75,8 @@ userSchema.methods.generateRefreshToken = async function () {
             userId: this._id.toString(),
         },
             // Access Token
-            process.env.JWT_SECRET_KEY, {
-            expiresIn: "10d",
+            process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: "1d",
         }
         )
     } catch (error) {
