@@ -11,7 +11,7 @@ const userDetailSchema = new mongoose.Schema({
     },
     userName: {
         type: String,
-        unique:true,
+        unique: true,
         trim: true,
         require: true,
     },
@@ -50,12 +50,12 @@ const userDetailSchema = new mongoose.Schema({
         require: false,
     },
     fundingRaise: {
-        type: Number,
+        type: Boolean,
         trim: true,
         require: false,
     },
     founderName: {
-        type: Number,
+        type: String,
         trim: true,
         require: false,
     },
